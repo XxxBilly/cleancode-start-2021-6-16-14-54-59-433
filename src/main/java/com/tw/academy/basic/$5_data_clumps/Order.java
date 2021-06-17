@@ -11,9 +11,9 @@ public class Order {
   public Order(int orderNumber, User user) {
     this.orderNumber = orderNumber;
 
-    this.buyerName = user.getBuyerName();
-    this.buyerPhoneNumber = user.getBuyerPhoneNumber();
-    this.buyerAddress = user.getBuyerAddress();
+    this.buyerName = user.getName();
+    this.buyerPhoneNumber = user.getPhoneNUmber();
+    this.buyerAddress = user.getAddress();
   }
 
   public String confirm() {
