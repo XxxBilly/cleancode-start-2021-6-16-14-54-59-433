@@ -3,21 +3,15 @@ package com.tw.academy.basic.$5_data_clumps;
 public class Parcel {
 
   private final User receiver;
+  private final User sender;
   private String size;
   private Double weight;
 
-  private String senderName;
-  private String senderPhoneNumber;
-  private String senderAddress;
-
-  public Parcel(String size, Double weight,
-      User receiver, String senderName, String senderPhoneNumber, String senderAddress) {
+  public Parcel(String size, Double weight, User receiver, User sender) {
     this.size = size;
     this.weight = weight;
     this.receiver = receiver;
-    this.senderName = senderName;
-    this.senderPhoneNumber = senderPhoneNumber;
-    this.senderAddress = senderAddress;
+    this.sender = sender;
   }
 
   public String confirmReceiver() {
@@ -29,6 +23,6 @@ public class Parcel {
   public String confirmSender() {
     return String.format("Please confirm sender information: sender name is %s, " +
             "sender phone number is %s and sender address is %s.\n",
-        senderName, senderPhoneNumber, senderAddress);
+        this.sender.getName(), this.sender.getPhoneNUmber(), this.sender.getAddress());
   }
 }
