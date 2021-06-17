@@ -1,29 +1,34 @@
 package com.tw.academy.basic.$6_primitive_obsession.practiceOne;
 
 public class DeliveryManager {
-    String toAddress;
-    String fromAddress;
 
-    public DeliveryManager(Address address, String toAddress) {
-        this.toAddress = toAddress;
-        this.fromAddress = address.getAddress();
-    }
+  private final Address to;
+  private final Address from;
+  String toAddress;
+  String fromAddress;
 
-    public DeliverCenter allocate(){
-        if (getProvince(toAddress).equals(getProvince(fromAddress)) && getCity(toAddress).equals(getCity(fromAddress))){
-            return DeliverCenter.LOCAL;
-        }
-        if (getProvince(toAddress).equals(getProvince(fromAddress))) {
-            return DeliverCenter.PROVINCE;
-        }
-        return DeliverCenter.FOREIGN;
-    }
+  public DeliveryManager(Address from, Address to) {
+    this.to = to;
+    this.toAddress = this.to.getAddress();
+    this.from = from;
+    this.fromAddress = this.from.getAddress();
+  }
 
-    private String getCity(String address) {
-        return address.substring(address.indexOf("省") + 1, address.indexOf("市"));
+  public DeliverCenter allocate() {
+    if (getProvince(toAddress).equals(getProvince(fromAddress)) && getCity(toAddress).equals(getCity(fromAddress))) {
+      return DeliverCenter.LOCAL;
     }
+    if (getProvince(toAddress).equals(getProvince(fromAddress))) {
+      return DeliverCenter.PROVINCE;
+    }
+    return DeliverCenter.FOREIGN;
+  }
 
-    private String getProvince(String address) {
-        return address.substring(0, address.indexOf("省"));
-    }
+  private String getCity(String address) {
+    return address.substring(address.indexOf("省") + 1, address.indexOf("市"));
+  }
+
+  private String getProvince(String address) {
+    return address.substring(0, address.indexOf("省"));
+  }
 }
