@@ -3,11 +3,12 @@ package com.tw.academy.basic.$7_long_method;
 /**
  * This class is a example for bad smell;
  *
- * @author  Thoughtworks
+ * @author Thoughtworks
  * @version 1.0
- * @since   2018-1-1
+ * @since 2018-1-1
  */
 public class OrderReceipt {
+
     private Order order;
 
     public OrderReceipt(Order order) {
@@ -22,7 +23,6 @@ public class OrderReceipt {
         output.append(order.getCustomerName());
         output.append(order.getCustomerAddress());
 
-        double totSalesTx = 0d;
         double tot = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription());
@@ -34,13 +34,10 @@ public class OrderReceipt {
             output.append(lineItem.totalAmount());
             output.append('\n');
 
-            double salesTax = lineItem.calculateSalesTax();
-            totSalesTx += salesTax;
-
-            tot += lineItem.totalAmount() + salesTax;
+            tot += lineItem.totalAmount() + lineItem.calculateSalesTax();
         }
 
-        output.append("Sales Tax").append('\t').append(totSalesTx);
+        output.append("Sales Tax").append('\t').append(order.calculateTotalTax());
 
         output.append("Total Amount").append('\t').append(tot);
         return output.toString();
