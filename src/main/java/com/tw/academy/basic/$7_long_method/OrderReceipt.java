@@ -34,7 +34,7 @@ public class OrderReceipt {
             output.append(lineItem.totalAmount());
             output.append('\n');
 
-            double salesTax = lineItem.totalAmount() * .10;
+            double salesTax = lineItem.calculateSalesTax();
             totSalesTx += salesTax;
 
             tot += lineItem.totalAmount() + salesTax;
