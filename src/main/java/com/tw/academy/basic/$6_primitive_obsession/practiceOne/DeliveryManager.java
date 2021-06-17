@@ -11,13 +11,21 @@ public class DeliveryManager {
   }
 
   public DeliverCenter allocate() {
-    if (getProvince(getToAddress()).equals(getProvince(getFromAddress())) && getCity(getToAddress()).equals(getCity(getFromAddress()))) {
+    if (isSameProvince(getToAddress(), getFromAddress())) {
       return DeliverCenter.LOCAL;
     }
-    if (getProvince(getToAddress()).equals(getProvince(getFromAddress()))) {
+    if (isSameCity(getToAddress(), getFromAddress())) {
       return DeliverCenter.PROVINCE;
     }
     return DeliverCenter.FOREIGN;
+  }
+
+  private boolean isSameCity(String toAddress, String fromAddress) {
+    return getProvince(toAddress).equals(getProvince(fromAddress));
+  }
+
+  private boolean isSameProvince(String toAddress, String fromAddress) {
+    return isSameCity(toAddress, fromAddress) && getCity(toAddress).equals(getCity(fromAddress));
   }
 
   private String getCity(String address) {
