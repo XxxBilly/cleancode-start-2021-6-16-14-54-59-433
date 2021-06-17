@@ -33,13 +33,11 @@ public class OrderReceipt {
             output.append('\t');
             output.append(lineItem.totalAmount());
             output.append('\n');
-
-            tot += lineItem.totalAmount() + lineItem.calculateSalesTax();
         }
 
         output.append("Sales Tax").append('\t').append(order.calculateTotalTax());
-
-        output.append("Total Amount").append('\t').append(tot);
+        output.append("Total Amount").append('\t').append(order.calculateTotal());
         return output.toString();
     }
+
 }
