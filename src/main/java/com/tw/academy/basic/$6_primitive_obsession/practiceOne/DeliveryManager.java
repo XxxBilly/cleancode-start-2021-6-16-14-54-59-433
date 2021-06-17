@@ -4,14 +4,10 @@ public class DeliveryManager {
 
   private final Address to;
   private final Address from;
-  private String toAddress;
-  private String fromAddress;
 
   public DeliveryManager(Address from, Address to) {
     this.to = to;
-    this.toAddress = this.to.getAddress();
     this.from = from;
-    this.fromAddress = this.from.getAddress();
   }
 
   public DeliverCenter allocate() {
@@ -33,10 +29,10 @@ public class DeliveryManager {
   }
 
   public String getToAddress() {
-    return toAddress;
+    return to.getAddress();
   }
 
   public String getFromAddress() {
-    return fromAddress;
+    return from.getAddress();
   }
 }
