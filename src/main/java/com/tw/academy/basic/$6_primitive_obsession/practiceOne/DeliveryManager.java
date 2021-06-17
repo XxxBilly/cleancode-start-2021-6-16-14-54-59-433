@@ -6,7 +6,7 @@ public class DeliveryManager {
 
     public DeliveryManager(Address address, String toAddress) {
         this.toAddress = toAddress;
-        this.fromAddress = address.getFromAddress();
+        this.fromAddress = address.getAddress();
     }
 
     public DeliverCenter allocate(){
