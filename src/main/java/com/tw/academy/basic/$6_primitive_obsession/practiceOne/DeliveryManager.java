@@ -4,8 +4,8 @@ public class DeliveryManager {
 
   private final Address to;
   private final Address from;
-  String toAddress;
-  String fromAddress;
+  private String toAddress;
+  private String fromAddress;
 
   public DeliveryManager(Address from, Address to) {
     this.to = to;
@@ -15,10 +15,10 @@ public class DeliveryManager {
   }
 
   public DeliverCenter allocate() {
-    if (getProvince(toAddress).equals(getProvince(fromAddress)) && getCity(toAddress).equals(getCity(fromAddress))) {
+    if (getProvince(getToAddress()).equals(getProvince(getFromAddress())) && getCity(getToAddress()).equals(getCity(getFromAddress()))) {
       return DeliverCenter.LOCAL;
     }
-    if (getProvince(toAddress).equals(getProvince(fromAddress))) {
+    if (getProvince(getToAddress()).equals(getProvince(getFromAddress()))) {
       return DeliverCenter.PROVINCE;
     }
     return DeliverCenter.FOREIGN;
@@ -30,5 +30,13 @@ public class DeliveryManager {
 
   private String getProvince(String address) {
     return address.substring(0, address.indexOf("省"));
+  }
+
+  public String getToAddress() {
+    return toAddress;
+  }
+
+  public String getFromAddress() {
+    return fromAddress;
   }
 }
