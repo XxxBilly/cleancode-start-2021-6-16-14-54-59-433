@@ -21,25 +21,46 @@ public class OrderReceipt {
 
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
-
-        output.append(HEADER_INFO);
-        output.append(order.getCustomerName());
-        output.append(order.getCustomerAddress());
-
-        for (LineItem lineItem : order.getLineItems()) {
-            output.append(lineItem.getDescription());
-            output.append(RECEIPT_FORMAT);
-            output.append(lineItem.getPrice());
-            output.append(RECEIPT_FORMAT);
-            output.append(lineItem.getQuantity());
-            output.append(RECEIPT_FORMAT);
-            output.append(lineItem.totalAmount());
-            output.append('\n');
-        }
-
-        output.append(SALES_TAX).append(RECEIPT_FORMAT).append(order.calculateTotalTax());
-        output.append(TOTAL_AMOUNT).append(RECEIPT_FORMAT).append(order.calculateTotal());
+        print(output, HEADER_INFO);
+        printCustomerInfo(output);
+        printOrderDetails(output);
         return output.toString();
     }
 
+    private void printCustomerInfo(StringBuilder output) {
+        print(output, order.getCustomerName());
+        print(output, order.getCustomerAddress());
+    }
+
+    private void printOrderDetails(StringBuilder output) {
+        for (LineItem lineItem : order.getLineItems()) {
+            printLieItem(output, lineItem);
+            output.append('\n');
+        }
+        print(output, SALES_TAX, order.calculateTotalTax());
+        print(output, TOTAL_AMOUNT, order.calculateTotal());
+    }
+
+    private void printLieItem(StringBuilder output, LineItem lineItem) {
+        print(output, lineItem.getDescription());
+        print(output, lineItem.getPrice());
+        print(output, lineItem.getQuantity());
+        print(output, lineItem.totalAmount());
+    }
+
+    private void print(StringBuilder output, String description) {
+        output.append(description);
+    }
+
+    private void print(StringBuilder output, String name, double value) {
+        output.append(name).append(RECEIPT_FORMAT).append(value);
+    }
+
+    private void print(StringBuilder output, double value) {
+        output.append(RECEIPT_FORMAT).append(value);
+    }
+
+    private void print(StringBuilder output, int value) {
+        output.append(RECEIPT_FORMAT).append(value);
+    }
 }
