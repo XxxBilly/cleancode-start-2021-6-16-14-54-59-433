@@ -9,6 +9,10 @@ package com.tw.academy.basic.$7_long_method;
  */
 public class OrderReceipt {
 
+    public static final String HEADER_INFO = "======Printing Orders======\n";
+    public static final String SALES_TAX = "Sales Tax";
+    public static final String TOTAL_AMOUNT = "Total Amount";
+    private static final String RECEIPT_FORMAT = "\t";
     private Order order;
 
     public OrderReceipt(Order order) {
@@ -18,25 +22,23 @@ public class OrderReceipt {
     public String printReceipt() {
         StringBuilder output = new StringBuilder();
 
-        output.append("======Printing Orders======\n");
-
+        output.append(HEADER_INFO);
         output.append(order.getCustomerName());
         output.append(order.getCustomerAddress());
 
-        double tot = 0d;
         for (LineItem lineItem : order.getLineItems()) {
             output.append(lineItem.getDescription());
-            output.append('\t');
+            output.append(RECEIPT_FORMAT);
             output.append(lineItem.getPrice());
-            output.append('\t');
+            output.append(RECEIPT_FORMAT);
             output.append(lineItem.getQuantity());
-            output.append('\t');
+            output.append(RECEIPT_FORMAT);
             output.append(lineItem.totalAmount());
             output.append('\n');
         }
 
-        output.append("Sales Tax").append('\t').append(order.calculateTotalTax());
-        output.append("Total Amount").append('\t').append(order.calculateTotal());
+        output.append(SALES_TAX).append(RECEIPT_FORMAT).append(order.calculateTotalTax());
+        output.append(TOTAL_AMOUNT).append(RECEIPT_FORMAT).append(order.calculateTotal());
         return output.toString();
     }
 
